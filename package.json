@@ -1,18 +1,11 @@
 {
-  "name": "jagdamba-opticals-backend",
+  "name": "jagdamba-optical-backend",
   "version": "1.0.0",
-  "description": "Booking form backend for Jagdamba Opticals — sends new appointment requests via Email and WhatsApp",
-  "main": "server.js",
-  "type": "commonjs",
-  "scripts": {
-    "start": "node server.js",
-    "dev": "node server.js"
-  },
+  "private": true,
+  "scripts": {"start":"node server.js","dev":"nodemon server.js"},
   "dependencies": {
-    "express": "^4.19.2",
-    "cors": "^2.8.5",
-    "dotenv": "^16.4.5",
-    "nodemailer": "^6.9.14",
-    "twilio": "^5.2.2"
-  }
+    "bcryptjs":"^3.0.2","cors":"^2.8.5","dotenv":"^16.6.1","express":"^5.1.0",
+    "jsonwebtoken":"^9.0.2","mongoose":"^8.18.0"
+  },
+  "devDependencies":{"nodemon":"^3.1.10"}
 }
