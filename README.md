@@ -1,36 +1,27 @@
-# Jagdamba Optical Full-Stack Website
+# Jagdamba Optical Website
 
-This package contains your existing frontend plus a Node.js/Express + MongoDB backend and a responsive admin panel.
+## Files
+- index.html — main website
+- style.css — complete responsive design
+- script.js — frame catalogue, filters and WhatsApp enquiry
 
-## Folder structure
-- `frontend/` — customer website + `admin.html`
-- `backend/` — REST API, authentication, MongoDB models and seed data
+## Edit before publishing
+Open `script.js` and replace:
+`91XXXXXXXXXX`
+with your WhatsApp number.
 
-## Backend setup
-1. Install Node.js.
-2. Create a MongoDB Atlas database.
-3. Copy `backend/.env.example` to `backend/.env`.
-4. Add your MongoDB URI, JWT secret, admin email and admin password.
-5. Run:
-   `cd backend`
-   `npm install`
-   `npm run dev`
+Open `index.html` and replace:
+- [Edit your store address here]
+- [Edit State]
+- [Edit Phone Number]
+- [Edit Timing]
+- [Your Address]
+- [Your Phone]
 
-## Frontend
-Serve the `frontend` folder with Live Server or another static server.
-Default API URL is `http://localhost:5000`.
+## Add your own frame
+In `script.js`, add another object inside `products`:
+{name:"Your Frame",type:"Full Rim",cat:"Men",price:799,icon:"👓"}
 
-## Admin
-Open `/admin.html` and log in with the credentials from `.env`.
-From the panel you can:
-- Add/edit/hide frames
-- See customer enquiries
-- Change enquiry status
-- Update store phone, WhatsApp, address and opening hours
-- See dashboard counts
-
-## Production deployment
-Deploy the backend to Render/Railway/Fly.io or another Node host and MongoDB Atlas for the database. Deploy the frontend to Vercel/Netlify/GitHub Pages and change the API URL in `script.js` and `admin.js` from localhost to your deployed backend URL.
-
-## Security
-Do not publish `.env`. Change the default admin password and use a long random JWT secret.
+## Deploy
+Upload all files to GitHub, then import the repository into Vercel.
+No backend is required for this version.

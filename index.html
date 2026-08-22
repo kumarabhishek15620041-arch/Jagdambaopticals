@@ -1,412 +1,93 @@
-```
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Jagdamba Opticals — Fine Eyewear</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Jost:wght@300;400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
-<style>
-  :root{
-    --ink:#131109;
-    --ink-soft:#211d13;
-    --ivory:#FAF5E9;
-    --ivory-dim:#F0E9D8;
-    --gold:#C6A15B;
-    --gold-bright:#E0BE7E;
-    --maroon:#7A2230;
-    --stone:#A79C87;
-    --line:rgba(198,161,91,0.25);
-    --radius:2px;
-  }
-  *{margin:0;padding:0;box-sizing:border-box;}
-  html{scroll-behavior:smooth;}
-  body{
-    background:var(--ivory);
-    color:var(--ink);
-    font-family:'Jost',sans-serif;
-    font-weight:300;
-    line-height:1.6;
-    overflow-x:hidden;
-  }
-  h1,h2,h3,.serif{font-family:'Cormorant Garamond',serif;font-weight:500;}
-  .mono{font-family:'Space Mono',monospace;}
-  a{color:inherit;text-decoration:none;}
-  .wrap{max-width:1180px;margin:0 auto;padding:0 32px;}
-  img{max-width:100%;display:block;}
-
-  ::selection{background:var(--gold);color:var(--ink);}
-  :focus-visible{outline:2px solid var(--gold);outline-offset:3px;}
-
-  /* ---------- NAV ---------- */
-  header{
-    position:fixed;top:0;left:0;right:0;z-index:100;
-    background:rgba(19,17,9,0.0);
-    transition:background .4s ease, padding .4s ease, border-color .4s ease;
-    border-bottom:1px solid transparent;
-  }
-  header.scrolled{
-    background:rgba(19,17,9,0.94);
-    backdrop-filter:blur(8px);
-    border-color:var(--line);
-  }
-  .nav-inner{
-    display:flex;align-items:center;justify-content:space-between;
-    padding:22px 32px;max-width:1180px;margin:0 auto;
-  }
-  .brandmark{display:flex;align-items:center;gap:12px;}
-  .brandmark svg{width:34px;height:34px;flex-shrink:0;}
-  .brandmark .name{
-    font-family:'Cormorant Garamond',serif;font-weight:500;
-    font-size:1.35rem;letter-spacing:.04em;color:var(--gold-bright);
-  }
-  .brandmark .name span{display:block;font-family:'Space Mono',monospace;font-size:.55rem;letter-spacing:.32em;color:var(--stone);text-transform:uppercase;margin-top:2px;}
-  nav.links{display:flex;gap:38px;align-items:center;}
-  nav.links a{
-    font-size:.78rem;letter-spacing:.12em;text-transform:uppercase;color:var(--ivory-dim);
-    position:relative;padding-bottom:4px;
-  }
-  nav.links a::after{
-    content:"";position:absolute;left:0;bottom:0;width:0;height:1px;background:var(--gold);
-    transition:width .3s ease;
-  }
-  nav.links a:hover::after{width:100%;}
-  .nav-cta{
-    border:1px solid var(--gold);color:var(--gold-bright) !important;
-    padding:9px 20px;font-size:.72rem !important;letter-spacing:.14em !important;
-  }
-  .nav-cta:hover{background:var(--gold);color:var(--ink) !important;}
-  .nav-cta::after{display:none;}
-  .burger{display:none;background:none;border:none;cursor:pointer;padding:6px;}
-  .burger span{display:block;width:24px;height:1px;background:var(--ivory);margin:6px 0;}
-
-  /* ---------- HERO ---------- */
-  .hero{
-    min-height:100vh;background:var(--ink);color:var(--ivory);
-    display:flex;align-items:center;position:relative;overflow:hidden;
-    padding:140px 0 80px;
-  }
-  .hero-grain{
-    position:absolute;inset:0;pointer-events:none;opacity:.05;
-    background-image:radial-gradient(circle at 1px 1px, #fff 1px, transparent 0);
-    background-size:3px 3px;
-  }
-  .hero-inner{
-    display:grid;grid-template-columns:1.1fr .9fr;gap:60px;align-items:center;
-    max-width:1180px;margin:0 auto;padding:0 32px;position:relative;z-index:2;width:100%;
-  }
-  .eyebrow{
-    font-family:'Space Mono',monospace;font-size:.72rem;letter-spacing:.32em;text-transform:uppercase;
-    color:var(--gold);margin-bottom:26px;display:flex;align-items:center;gap:14px;
-  }
-  .eyebrow::before{content:"";width:32px;height:1px;background:var(--gold);}
-  .hero h1{
-    font-size:clamp(2.6rem,5.4vw,4.6rem);line-height:1.06;font-weight:500;
-    color:var(--ivory);margin-bottom:28px;
-  }
-  .hero h1 em{font-style:italic;color:var(--gold-bright);}
-  .hero p.lede{
-    font-size:1.08rem;color:var(--stone);max-width:460px;margin-bottom:40px;font-weight:300;
-  }
-  .btn-row{display:flex;gap:18px;flex-wrap:wrap;}
-  .btn{
-    display:inline-block;padding:15px 30px;font-size:.75rem;letter-spacing:.14em;text-transform:uppercase;
-    border:1px solid var(--gold);cursor:pointer;transition:all .3s ease;font-family:'Jost',sans-serif;
-  }
-  .btn-solid{background:var(--gold);color:var(--ink);}
-  .btn-solid:hover{background:var(--gold-bright);}
-  .btn-ghost{color:var(--ivory);border-color:rgba(250,245,233,0.35);}
-  .btn-ghost:hover{border-color:var(--gold);color:var(--gold-bright);}
-
-  /* lens signature graphic */
-  .lens-wrap{position:relative;display:flex;align-items:center;justify-content:center;}
-  .lens-wrap svg{width:100%;max-width:420px;height:auto;}
-  .ring{transform-origin:center;}
-  .ring1{animation:spin 60s linear infinite;}
-  .ring2{animation:spin 90s linear infinite reverse;}
-  @keyframes spin{to{transform:rotate(360deg);}}
-  @media (prefers-reduced-motion:reduce){.ring1,.ring2{animation:none;}}
-
-  /* ---------- SECTION SHELL ---------- */
-  section{padding:120px 0;}
-  .section-head{max-width:640px;margin-bottom:64px;}
-  .section-head .eyebrow{color:var(--maroon);}
-  .section-head .eyebrow::before{background:var(--maroon);}
-  .section-head h2{font-size:clamp(2rem,3.6vw,3rem);color:var(--ink);}
-  .section-head p{color:#5b5647;max-width:520px;margin-top:16px;}
-
-  .divider{
-    display:flex;align-items:center;gap:16px;margin:0 auto;width:fit-content;
-  }
-  .divider .dot{width:6px;height:6px;border-radius:50%;background:var(--gold);}
-  .divider .line{width:60px;height:1px;background:var(--line);}
-
-  /* ---------- ABOUT ---------- */
-  .about{background:var(--ivory);}
-  .about-grid{display:grid;grid-template-columns:.85fr 1.15fr;gap:80px;align-items:center;}
-  .about-figure{
-    aspect-ratio:4/5;border:1px solid var(--line);position:relative;
-    display:flex;align-items:center;justify-content:center;background:var(--ivory-dim);
-  }
-  .about-figure svg{width:60%;}
-  .about-figure .frame-label{
-    position:absolute;bottom:18px;left:18px;font-family:'Space Mono',monospace;font-size:.62rem;
-    letter-spacing:.2em;text-transform:uppercase;color:var(--stone);
-  }
-  .about-copy p{color:#4a4638;margin-bottom:18px;font-size:1.02rem;}
-  .about-copy p:first-of-type{font-size:1.15rem;color:var(--ink);}
-  .stat-row{display:flex;gap:48px;margin-top:36px;padding-top:36px;border-top:1px solid var(--line);}
-  .stat-row div strong{display:block;font-family:'Cormorant Garamond',serif;font-size:2.1rem;color:var(--maroon);}
-  .stat-row div span{font-family:'Space Mono',monospace;font-size:.62rem;letter-spacing:.16em;text-transform:uppercase;color:var(--stone);}
-
-  /* ---------- SERVICES ---------- */
-  .services{background:var(--ink);color:var(--ivory);}
-  .services .section-head .eyebrow{color:var(--gold);}
-  .services .section-head .eyebrow::before{background:var(--gold);}
-  .services .section-head h2{color:var(--ivory);}
-  .services .section-head p{color:var(--stone);}
-  .service-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:rgba(198,161,91,0.18);border:1px solid rgba(198,161,91,0.18);}
-  .service-card{
-    background:var(--ink);padding:44px 34px;transition:background .3s ease;
-  }
-  .service-card:hover{background:var(--ink-soft);}
-  .service-card svg{width:34px;height:34px;stroke:var(--gold);margin-bottom:22px;}
-  .service-card h3{font-size:1.35rem;color:var(--ivory);margin-bottom:10px;font-weight:500;}
-  .service-card p{font-size:.9rem;color:var(--stone);}
-
-  /* ---------- COLLECTIONS ---------- */
-  .collections{background:var(--ivory-dim);}
-  .collect-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:28px;}
-  .collect-card{
-    border:1px solid var(--line);padding:38px 26px;text-align:center;background:var(--ivory);
-    transition:transform .3s ease, box-shadow .3s ease;
-  }
-  .collect-card:hover{transform:translateY(-6px);box-shadow:0 18px 34px -20px rgba(19,17,9,0.35);}
-  .collect-card .ring-icon{width:64px;height:64px;margin:0 auto 20px;}
-  .collect-card h3{font-size:1.25rem;color:var(--ink);margin-bottom:8px;}
-  .collect-card span{font-family:'Space Mono',monospace;font-size:.62rem;letter-spacing:.18em;text-transform:uppercase;color:var(--maroon);}
-
-  /* ---------- BOOKING ---------- */
-  .booking{background:var(--maroon);color:var(--ivory);position:relative;overflow:hidden;}
-  .booking::before{
-    content:"";position:absolute;top:-120px;right:-120px;width:340px;height:340px;
-    border:1px solid rgba(250,245,233,0.15);border-radius:50%;
-  }
-  .booking::after{
-    content:"";position:absolute;bottom:-160px;left:-100px;width:280px;height:280px;
-    border:1px solid rgba(250,245,233,0.1);border-radius:50%;
-  }
-  .booking-grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:70px;position:relative;z-index:2;}
-  .booking .section-head .eyebrow{color:var(--gold-bright);}
-  .booking .section-head .eyebrow::before{background:var(--gold-bright);}
-  .booking .section-head h2{color:var(--ivory);}
-  .booking .section-head p{color:rgba(250,245,233,0.75);}
-  .booking-note{margin-top:30px;font-size:.88rem;color:rgba(250,245,233,0.68);border-left:2px solid var(--gold-bright);padding-left:16px;}
-
-  form{display:grid;gap:20px;}
-  .form-row{display:grid;grid-template-columns:1fr 1fr;gap:20px;}
-  label{display:block;font-family:'Space Mono',monospace;font-size:.62rem;letter-spacing:.16em;text-transform:uppercase;color:rgba(250,245,233,0.6);margin-bottom:8px;}
-  input,select,textarea{
-    width:100%;background:transparent;border:none;border-bottom:1px solid rgba(250,245,233,0.35);
-    color:var(--ivory);padding:10px 2px;font-family:'Jost',sans-serif;font-size:.95rem;font-weight:300;
-  }
-  input::placeholder,textarea::placeholder{color:rgba(250,245,233,0.35);}
-  select{color:var(--ivory);}
-  select option{color:var(--ink);}
-  input:focus,select:focus,textarea:focus{outline:none;border-color:var(--gold-bright);}
-  textarea{resize:vertical;min-height:70px;}
-  .submit-btn{
-    justify-self:start;margin-top:10px;background:var(--ivory);color:var(--maroon);border:1px solid var(--ivory);
-    padding:15px 34px;font-size:.75rem;letter-spacing:.14em;text-transform:uppercase;cursor:pointer;
-    font-family:'Jost',sans-serif;transition:all .3s ease;
-  }
-  .submit-btn:hover{background:transparent;color:var(--ivory);}
-  .form-success{
-    display:none;padding:22px;border:1px solid var(--gold-bright);font-size:.92rem;color:var(--ivory);
-  }
-  .form-success.show{display:block;}
-
-  /* ---------- VISIT ---------- */
-  .visit{background:var(--ivory);}
-  .visit-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;}
-  .hours-table{width:100%;border-collapse:collapse;margin-top:10px;}
-  .hours-table tr{border-bottom:1px solid var(--line);}
-  .hours-table td{padding:14px 0;font-size:.95rem;}
-  .hours-table td:first-child{color:var(--ink);font-weight:400;}
-  .hours-table td:last-child{text-align:right;color:#5b5647;font-family:'Space Mono',monospace;font-size:.82rem;}
-  .contact-list{margin-top:36px;display:grid;gap:18px;}
-  .contact-list a{display:flex;gap:14px;align-items:flex-start;color:var(--ink);font-size:.98rem;}
-  .contact-list svg{width:20px;height:20px;stroke:var(--maroon);flex-shrink:0;margin-top:2px;}
-  .map-box{
-    border:1px solid var(--line);aspect-ratio:1/1;position:relative;overflow:hidden;background:var(--ink);
-  }
-  .map-box iframe{width:100%;height:100%;border:0;filter:grayscale(1) invert(0.92) contrast(0.9);}
-  .map-tag{
-    position:absolute;top:18px;left:18px;background:var(--ivory);padding:8px 14px;
-    font-family:'Space Mono',monospace;font-size:.62rem;letter-spacing:.14em;text-transform:uppercase;color:var(--ink);
-  }
-
-  /* ---------- FOOTER ---------- */
-  footer{background:var(--ink);color:var(--stone);padding:70px 0 30px;}
-  .foot-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:50px;padding-bottom:50px;border-bottom:1px solid rgba(198,161,91,0.15);}
-  .foot-brand .brandmark .name{color:var(--gold-bright);}
-  .foot-brand p{margin-top:18px;font-size:.88rem;max-width:280px;}
-  footer h4{font-family:'Space Mono',monospace;font-size:.66rem;letter-spacing:.18em;text-transform:uppercase;color:var(--ivory);margin-bottom:20px;}
-  footer ul{list-style:none;display:grid;gap:12px;}
-  footer ul a{font-size:.88rem;color:var(--stone);}
-  footer ul a:hover{color:var(--gold-bright);}
-  .foot-bottom{
-    display:flex;justify-content:space-between;align-items:center;padding-top:26px;
-    font-family:'Space Mono',monospace;font-size:.68rem;letter-spacing:.06em;color:rgba(167,156,135,0.6);flex-wrap:wrap;gap:12px;
-  }
-
-  /* ---------- LEAD POPUP ---------- */
-  .lead-overlay{
-    position:fixed;inset:0;background:rgba(19,17,9,0.72);backdrop-filter:blur(3px);
-    display:flex;align-items:center;justify-content:center;z-index:1000;
-    opacity:0;pointer-events:none;transition:opacity .35s ease;padding:20px;
-  }
-  .lead-overlay.show{opacity:1;pointer-events:auto;}
-  .lead-card{
-    background:var(--ink);color:var(--ivory);max-width:420px;width:100%;
-    border:1px solid var(--gold);padding:44px 36px;position:relative;
-    transform:translateY(16px);transition:transform .35s ease;
-  }
-  .lead-overlay.show .lead-card{transform:translateY(0);}
-  .lead-close{
-    position:absolute;top:16px;right:16px;background:none;border:none;cursor:pointer;
-    color:var(--stone);font-size:1.1rem;line-height:1;padding:6px;
-  }
-  .lead-close:hover{color:var(--gold-bright);}
-  .lead-card .eyebrow{color:var(--gold);}
-  .lead-card .eyebrow::before{background:var(--gold);}
-  .lead-card h3{font-size:1.7rem;margin:14px 0 10px;color:var(--ivory);}
-  .lead-card p.lead-copy{color:var(--stone);font-size:.92rem;margin-bottom:26px;}
-  .lead-card form{display:grid;gap:16px;}
-  .lead-card input{border-bottom:1px solid rgba(250,245,233,0.35);}
-  .lead-card .submit-btn{width:100%;text-align:center;justify-self:stretch;background:var(--gold);color:var(--ink);border-color:var(--gold);}
-  .lead-card .submit-btn:hover{background:var(--gold-bright);border-color:var(--gold-bright);}
-  .lead-success{display:none;text-align:center;padding:10px 0;}
-  .lead-success.show{display:block;}
-  .lead-success p{color:var(--ivory);font-size:.98rem;}
-
-  /* ---------- REVEAL ---------- */
-  .reveal{opacity:0;transform:translateY(24px);transition:opacity .8s ease, transform .8s ease;}
-  .reveal.in{opacity:1;transform:translateY(0);}
-
-  /* ---------- RESPONSIVE ---------- */
-  @media (max-width:920px){
-    .hero-inner{grid-template-columns:1fr;text-align:left;}
-    .lens-wrap{order:-1;max-width:260px;margin:0 auto 20px;}
-    .about-grid,.booking-grid,.visit-grid{grid-template-columns:1fr;gap:44px;}
-    .service-grid{grid-template-columns:1fr 1fr;}
-    .collect-grid{grid-template-columns:1fr 1fr;}
-    .foot-grid{grid-template-columns:1fr 1fr;}
-    nav.links{
-      position:fixed;top:0;right:0;height:100vh;width:min(80vw,320px);
-      background:var(--ink);flex-direction:column;justify-content:center;align-items:flex-start;
-      padding:40px;gap:28px;transform:translateX(100%);transition:transform .4s ease;
-    }
-    nav.links.open{transform:translateX(0);}
-    .burger{display:block;}
-  }
-  @media (max-width:600px){
-    section{padding:80px 0;}
-    .form-row{grid-template-columns:1fr;}
-    .service-grid{grid-template-columns:1fr;}
-    .collect-grid{grid-template-columns:1fr;}
-    .stat-row{gap:28px;flex-wrap:wrap;}
-  }
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Jagdamba Optical | Frames, Lenses & Eyewear</title>
+  <meta name="description" content="Jagdamba Optical - premium frames, sunglasses and lenses.">
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-
-<header id="siteHeader">
-  <div class="nav-inner">
-    <a href="#top" class="brandmark">
-      <svg viewBox="0 0 40 40" fill="none"><circle cx="20" cy="20" r="18" stroke="#C6A15B" stroke-width="1"/><circle cx="20" cy="20" r="11" stroke="#E0BE7E" stroke-width="1"/><circle cx="20" cy="20" r="2.4" fill="#E0BE7E"/></svg>
-      <span class="name">Jagdamba<span>Opticals · New Delhi</span></span>
-    </a>
-    <nav class="links" id="navLinks">
-      <a href="#about">Heritage</a>
-      <a href="#services">Services</a>
-      <a href="#collections">Collections</a>
-      <a href="#visit">Visit</a>
-      <a href="#booking" class="nav-cta">Book an Eye Test</a>
-    </nav>
-    <button class="burger" id="burger" aria-label="Toggle menu"><span></span><span></span><span></span></button>
-  </div>
+<header class="header">
+  <a class="brand" href="#home"><span class="logo-mark">👑</span><span><b>Jagdamba</b><small>OPTICAL</small></span></a>
+  <nav id="nav">
+    <a href="#home">Home</a><a href="#frames">Frames</a><a href="#sunglasses">Sunglasses</a>
+    <a href="#lenses">Lenses</a><a href="#prices">Price List</a><a href="#about">About</a><a href="#contact">Contact</a>
+  </nav>
+  <button class="menu" onclick="toggleMenu()">☰</button>
 </header>
 
-<!-- HERO -->
-<section class="hero" id="top">
-  <div class="hero-grain"></div>
-  <div class="hero-inner">
-    <div>
-      <div class="eyebrow">Fine Eyewear &amp; Precision Eye Care</div>
-      <h1>Clarity is<br>a form of <em>elegance</em>.</h1>
-      <p class="lede">For three generations, Jagdamba Opticals has paired precise eye care with frames worth wearing — hand-selected eyewear, expert testing, and craftsmanship you can see and feel.</p>
-      <div class="btn-row">
-        <a href="#booking" class="btn btn-solid">Book an Eye Test</a>
-        <a href="#collections" class="btn btn-ghost">Explore Collections</a>
-      </div>
-    </div>
-    <div class="lens-wrap">
-      <svg viewBox="0 0 400 400" fill="none">
-        <g class="ring ring1">
-          <circle cx="200" cy="200" r="170" stroke="#C6A15B" stroke-width="1" stroke-dasharray="2 10"/>
-        </g>
-        <g class="ring ring2">
-          <circle cx="200" cy="200" r="138" stroke="#C6A15B" stroke-width="1"/>
-        </g>
-        <circle cx="200" cy="200" r="96" stroke="#E0BE7E" stroke-width="1.4"/>
-        <circle cx="200" cy="200" r="60" stroke="#E0BE7E" stroke-width="1" fill="rgba(224,190,126,0.05)"/>
-        <circle cx="200" cy="200" r="4" fill="#E0BE7E"/>
-        <path d="M60 200 H 96 M 304 200 H 340" stroke="#C6A15B" stroke-width="1"/>
-      </svg>
-    </div>
+<main>
+<section id="home" class="hero">
+  <div class="hero-content">
+    <p class="eyebrow">STYLISH FRAMES • PREMIUM LENSES • TRUSTED SERVICE</p>
+    <h1>See the World<br><span>More Clearly.</span></h1>
+    <p>Discover stylish eyewear, quality lenses and professional optical service — all in one place.</p>
+    <div class="actions"><a class="btn primary" href="#frames">Explore Frames</a><a class="btn ghost" href="#prices">View Price List</a></div>
   </div>
 </section>
 
-<!-- ABOUT -->
-<section class="about" id="about">
-  <div class="wrap">
-    <div class="about-grid">
-      <div class="about-figure reveal">
-        <svg viewBox="0 0 200 100" fill="none">
-          <path d="M20 55c0-15 12-25 30-25s30 10 30 25-12 22-30 22-30-7-30-22z" stroke="#7A2230" stroke-width="1.4"/>
-          <path d="M120 55c0-15 12-25 30-25s30 10 30 25-12 22-30 22-30-7-30-22z" stroke="#7A2230" stroke-width="1.4"/>
-          <path d="M80 50h20" stroke="#7A2230" stroke-width="1.4"/>
-          <path d="M15 48 L2 42" stroke="#7A2230" stroke-width="1.4"/>
-          <path d="M185 48 L198 42" stroke="#7A2230" stroke-width="1.4"/>
-        </svg>
-        <span class="frame-label">Fig. 01 — House Frame</span>
-      </div>
-      <div class="about-copy reveal">
-        <div class="eyebrow">Our Heritage</div>
-        <h2 class="serif" style="font-size:2.2rem;margin-bottom:22px;">A family name, trusted for generations.</h2>
-        <p>Jagdamba Opticals began as a small neighbourhood counter with one promise: give every customer honest advice and a frame that truly suits them. That promise hasn't changed.</p>
-        <p>Today, our opticians combine traditional attentiveness with modern diagnostic equipment — so every pair of glasses that leaves our store is both precisely correct and unmistakably yours.</p>
-        <div class="stat-row">
-          <div><strong>25+</strong><span>Years of Trust</span></div>
-          <div><strong>40k+</strong><span>Eyes Examined</span></div>
-          <div><strong>500+</strong><span>Frame Styles</span></div>
-        </div>
-      </div>
-    </div>
+<section class="trust">
+  <div>👓 <b>Wide Collection</b><small>Frames & Sunglasses</small></div>
+  <div>◉ <b>Premium Lenses</b><small>Quality Lens Options</small></div>
+  <div>✦ <b>Expert Service</b><small>Professional Eye Care</small></div>
+  <div>♥ <b>Trusted Store</b><small>Customer Satisfaction</small></div>
+</section>
+
+<section class="section" id="frames">
+  <div class="section-title"><p class="eyebrow">OUR COLLECTION</p><h2>Featured Frames</h2><p>Find a style that suits you.</p></div>
+  <div class="filters">
+    <input id="search" oninput="filterProducts()" placeholder="Search frames...">
+    <select id="category" onchange="filterProducts()"><option value="all">All Types</option><option>Men</option><option>Women</option><option>Kids</option><option>Unisex</option></select>
+    <select id="type" onchange="filterProducts()"><option value="all">Frame Type</option><option>Full Rim</option><option>Half Rim</option><option>Rimless</option><option>Round</option><option>Rectangle</option><option>Cat Eye</option></select>
+  </div>
+  <div id="products" class="grid"></div>
+</section>
+
+<section class="promo"><div><p class="eyebrow">QUALITY EYEWEAR</p><h2>Your Eyes Deserve the Best.</h2><p>Choose comfortable frames and lens options made for everyday clarity.</p><a class="btn primary" href="#contact">Enquire on WhatsApp</a></div></section>
+
+<section class="section" id="lenses">
+  <div class="section-title"><p class="eyebrow">LENS TECHNOLOGY</p><h2>Lens Options</h2><p>Choose the right lens for your lifestyle.</p></div>
+  <div class="lens-grid">
+    <article><span>∞</span><h3>Single Vision</h3><p>Standard vision correction.</p><b>Starting ₹799</b></article>
+    <article><span>☀</span><h3>Anti-Glare</h3><p>Reduces glare and improves clarity.</p><b>Starting ₹1,299</b></article>
+    <article><span>▣</span><h3>Blue-Cut</h3><p>Helps filter blue light.</p><b>Starting ₹1,499</b></article>
+    <article><span>◒</span><h3>Photochromic</h3><p>Adapts to changing light.</p><b>Starting ₹2,499</b></article>
+    <article><span>◉</span><h3>Bifocal</h3><p>Two powers in one lens.</p><b>Starting ₹1,999</b></article>
+    <article><span>◎</span><h3>Progressive</h3><p>Smooth multi-focus vision.</p><b>Starting ₹2,999</b></article>
   </div>
 </section>
 
-<!-- SERVICES -->
-<section class="services" id="services">
-  <div class="wrap">
-    <div class="section-head reveal">
-      <div class="eyebrow">What We Offer</div>
-      <h2 class="serif">Care and craft, under one roof</h2>
-      <p>From the first eye test to the final fitting, every step is handled in-house by our team.</p>
-    </div>
-    <div class="service-grid">
-      <div class="service-card reveal">
-        <svg viewBox="0 0 24 24" fill="none" stroke-width="1.2"><path d="M2 12s4-7 10-7 10 7 10 7-4 7-10 7-10-7-10-7z"/><circle cx="12" cy="12" r="3.2"/></svg>
-        <h3>Comp
+<section class="section" id="prices">
+  <div class="section-title"><p class="eyebrow">TRANSPARENT PRICING</p><h2>Price List</h2><p>Sample prices — edit them anytime in this file.</p></div>
+  <div class="price-grid">
+    <article><h3>Basic Frames</h3><strong>From ₹499</strong></article><article><h3>Premium Frames</h3><strong>From ₹999</strong></article>
+    <article><h3>Kids Frames</h3><strong>From ₹599</strong></article><article><h3>Sunglasses</h3><strong>From ₹699</strong></article>
+    <article><h3>Anti-Glare Lens</h3><strong>From ₹1,299</strong></article><article><h3>Blue-Cut Lens</h3><strong>From ₹1,499</strong></article>
+  </div>
+</section>
+
+<section class="section" id="sunglasses">
+  <div class="section-title"><p class="eyebrow">SUN PROTECTION</p><h2>Sunglasses</h2><p>Stylish protection for everyday use.</p></div>
+  <div class="category-grid"><div>🕶️<h3>Polarized</h3><p>Reduce reflected glare.</p></div><div>😎<h3>UV Protection</h3><p>Everyday outdoor comfort.</p></div><div>👓<h3>Aviator</h3><p>Classic statement style.</p></div><div>◯<h3>Wayfarer</h3><p>Timeless everyday look.</p></div></div>
+</section>
+
+<section class="section about" id="about">
+  <div><p class="eyebrow">ABOUT US</p><h2>Jagdamba Optical</h2><p>We provide quality frames, sunglasses and lens solutions with a focus on comfort, style and customer satisfaction.</p></div>
+  <div class="why"><h3>Why Choose Us?</h3><p>✓ Quality Products</p><p>✓ Affordable Prices</p><p>✓ Professional Guidance</p><p>✓ After-Sales Support</p></div>
+</section>
+
+<section class="contact" id="contact">
+  <div><p class="eyebrow">VISIT / CONTACT</p><h2>Let's Find Your Perfect Pair.</h2>
+  <p><b>Address:</b> [Edit your store address here]</p><p><b>State:</b> [Edit State]</p><p><b>Country:</b> India</p><p><b>Phone:</b> [Edit Phone Number]</p><p><b>Opening Hours:</b> [Edit Timing]</p></div>
+  <form onsubmit="sendWhatsApp(event)"><input id="name" required placeholder="Your Name"><input id="phone" required placeholder="Phone Number"><textarea id="message" placeholder="What are you looking for?"></textarea><button class="btn primary" type="submit">Send Enquiry on WhatsApp</button></form>
+</section>
+</main>
+
+<footer><div class="footer-brand">👑 <b>Jagdamba Optical</b><p>Your trusted destination for frames, lenses & eyewear.</p></div>
+<div><h4>Quick Links</h4><a href="#frames">Frames</a><a href="#lenses">Lenses</a><a href="#prices">Price List</a><a href="#contact">Contact</a></div>
+<div><h4>Store Info</h4><p>[Your Address]</p><p>[Your Phone]</p><p>India</p></div>
+<p class="copyright">© 2026 Jagdamba Optical. All Rights Reserved.</p></footer>
+<script src="script.js"></script>
+</body>
+</html>
